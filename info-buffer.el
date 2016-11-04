@@ -23,20 +23,37 @@
 
 ;;; Code:
 
+(require 'info)
+
+(defun info-buffer--open (topic bufname)
+  "Open info on TOPIC in BUFNAME."
+  (if (get-buffer bufname)
+      (switch-to-buffer bufname)
+    (info topic bufname)))
+
 ;;;###autoload
-(defun info-display-manual-in-buffer (topic)
-  "Display Info TOPIC in its own buffer."
+(defun info-display-manual-in-buffer (topic replicate)
+  "Display Info TOPIC in its own buffer.
+
+With prefix, or if REPLICATE is non-nil, never reuse an existing
+buffer."
   (interactive
    (list
     (progn
       (info-initialize)
       (completing-read "Manual name: "
 		       (info--manual-names nil)
-		       nil t))))
-  (let ((bufname (format "*info: %s*" topic)))
-    (if (get-buffer bufname)
-        (switch-to-buffer bufname)
-      (info topic bufname))))
+		       nil t))
+    current-prefix-arg))
+  (let ((base-bufname (format "*info: %s*" topic)))
+    (if replicate
+        (let ((num 0)
+              (bufname base-bufname))
+          (while (get-buffer bufname)
+            (setq num (1+ num))
+            (setq bufname (concat base-bufname "<" (number-to-string num) ">")))
+          (info-buffer--open topic bufname))
+      (info-buffer--open topic base-bufname))))
 
 (provide 'info-buffer)
 
