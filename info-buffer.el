@@ -1,6 +1,6 @@
 ;;; info-buffer.el --- Display info topics on separate buffers
 ;;
-;; Copyright (C) 2015 Lluís Vilanova
+;; Copyright (C) 2015-2016 Lluís Vilanova
 ;;
 ;; Author: Lluís Vilanova <vilanova@ac.upc.edu>
 ;;
@@ -31,7 +31,7 @@
     (progn
       (info-initialize)
       (completing-read "Manual name: "
-		       (info--manual-names)
+		       (info--manual-names nil)
 		       nil t))))
   (let ((bufname (format "*info: %s*" topic)))
     (if (get-buffer bufname)
