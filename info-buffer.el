@@ -1,9 +1,14 @@
 ;;; info-buffer.el --- Display info topics on separate buffers
-;;
+
 ;; Copyright (C) 2015-2016 Lluís Vilanova
-;;
+                                        ;
 ;; Author: Lluís Vilanova <vilanova@ac.upc.edu>
-;;
+;; URL: http://www.github.com/llvilanova/info-buffer
+;; Version: 0.1
+;; Keywords: docs, info
+
+;; This file is not part of GNU Emacs.
+
 ;; This program is free software; you can redistribute it and/or
 ;; modify it under the terms of the GNU General Public License as
 ;; published by the Free Software Foundation, either version 3 of the
@@ -19,7 +24,15 @@
 
 ;;; Commentary:
 ;;
-;; Display every info topic on a separate buffer.
+;; Interactive command (`info-buffer') to display each info topic on its
+;; separate buffer.  With prefix, display an already opened topic on a new
+;; buffer.
+
+;; If you're using `use-package', you can easily re-define Emacs's info binding
+;; to use `info-buffer' instead:
+
+;;   (use-package info-buffer
+;;     :bind (("C-h i" . info-buffer)))
 
 ;;; Code:
 
@@ -32,8 +45,11 @@
     (info topic bufname)))
 
 ;;;###autoload
-(defun info-display-manual-in-buffer (topic replicate)
+(defun info-buffer (topic replicate)
   "Display Info TOPIC in its own buffer.
+
+Displays TOPIC on the current window, and reuses an existing
+buffer if it is already showing TOPIC.
 
 With prefix, or if REPLICATE is non-nil, never reuse an existing
 buffer."
