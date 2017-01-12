@@ -1,6 +1,6 @@
-;;; info-buffer.el --- Display info topics on separate buffers
+;;; info-buffer.el --- Display info topics in separate buffers
 
-;; Copyright (C) 2015-2016 Lluís Vilanova
+;; Copyright (C) 2015-2017 Lluís Vilanova
                                         ;
 ;; Author: Lluís Vilanova <vilanova@ac.upc.edu>
 ;; URL: http://www.github.com/llvilanova/info-buffer
