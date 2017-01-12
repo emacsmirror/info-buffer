@@ -4,7 +4,7 @@
                                         ;
 ;; Author: Lluís Vilanova <vilanova@ac.upc.edu>
 ;; URL: http://www.github.com/llvilanova/info-buffer
-;; Version: 0.1
+;; Version: 0.2
 ;; Keywords: docs, info
 
 ;; This file is not part of GNU Emacs.
