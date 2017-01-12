@@ -57,7 +57,7 @@ buffer."
    (list
     (progn
       (info-initialize)
-      (completing-read "Manual name: "
+      (completing-read "Display manual: "
 		       (info--manual-names nil)
 		       nil t))
     current-prefix-arg))
