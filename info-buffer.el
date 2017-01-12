@@ -38,6 +38,7 @@
 
 (require 'info)
 
+
 (defun info-buffer--open (topic bufname)
   "Open info on TOPIC in BUFNAME."
   (if (get-buffer bufname)
@@ -61,15 +62,10 @@ buffer."
 		       (info--manual-names nil)
 		       nil t))
     current-prefix-arg))
-  (let ((base-bufname (format "*info: %s*" topic)))
-    (if replicate
-        (let ((num 0)
-              (bufname base-bufname))
-          (while (get-buffer bufname)
-            (setq num (1+ num))
-            (setq bufname (concat base-bufname "<" (number-to-string num) ">")))
-          (info-buffer--open topic bufname))
-      (info-buffer--open topic base-bufname))))
+  (let ((bufname (format "*info: %s*" topic)))
+    (when replicate
+      (setq bufname (generate-new-buffer-name bufname)))
+    (info-buffer--open topic bufname)))
 
 (provide 'info-buffer)
 
